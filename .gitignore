@@ -36,3 +36,4 @@ node_modules
 /**/node/
 /**/bower_components/
 /**/.tmp/
+/**/dist
