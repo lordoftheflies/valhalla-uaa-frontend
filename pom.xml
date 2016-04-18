@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.cherubits</groupId>
+    <artifactId>valhalla-uaa-frontend</artifactId>
+    <version>1.0.0</version>
+    <packaging>pom</packaging>
+
+    <name>valhalla-uaa-frontend</name>
+    <description>User authentication and authorization micro-service.</description>
+
+    <parent>
+        <groupId>org.cherubits</groupId>
+        <artifactId>valhalla</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <java.version>1.8</java.version>
+    </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>com.github.eirslett</groupId>
+                <artifactId>frontend-maven-plugin</artifactId>
+                <version>0.0.29</version>
+                <configuration>
+                    <!--<workingDirectory>.</workingDirectory>-->
+                    <installDirectory>dist</installDirectory>
+                    <nodeVersion>v5.6.0</nodeVersion>
+                    <npmVersion>3.8.2</npmVersion>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>install node and npm</id>
+                        <goals>
+                            <goal>install-node-and-npm</goal>
+                        </goals>
+                        <phase>generate-resources</phase>
+                    </execution>
+                    <execution>
+                        <id>npm install</id>
+                        <goals>
+                            <goal>npm</goal>
+                        </goals>
+                        <phase>generate-resources</phase>        
+                    </execution>
+                    <execution>
+                        <id>bower install</id>
+                        <goals>
+                            <goal>bower</goal>
+                        </goals>
+                        <phase>generate-resources</phase>        
+                    </execution>
+                    
+                    
+                    <!--                    <execution>
+                    --><!--
+                    <execution>
+                        <id>npm install</id>
+                        <goals>
+                            <goal>npm</goal>
+                        </goals>
+                        <phase>generate-resources</phase>
+                    </execution>
+-->                    
+                    <execution>
+                        <id>gulp build</id>
+                        <goals>
+                            <goal>gulp</goal>
+                        </goals>
+                        <phase>generate-resources</phase>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+	
+
+</project>

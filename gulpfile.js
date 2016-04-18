@@ -40,7 +40,6 @@ var AUTOPREFIXER_BROWSERS = [
 ];
 
 var DIST = 'dist';
-var WEBAPP = '../webapp';
 
 var dist = function (subpath) {
     return !subpath ? DIST : path.join(DIST, subpath);
@@ -145,9 +144,6 @@ gulp.task('copy', function () {
             .pipe($.size({
                 title: 'copy'
             }));
-
-    gulp.src(dist('**')).pipe(gulp.dest(WEBAPP));
-
     return temp;
 });
 
