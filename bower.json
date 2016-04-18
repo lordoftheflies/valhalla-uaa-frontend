@@ -9,7 +9,9 @@
     "platinum-elements": "PolymerElements/platinum-elements#^1.1.0",
     "polymer": "Polymer/polymer#^1.2.0",
     "plutonium-login-widget": "git@github.com:lordoftheflies/plutonium-login-widget.git",
-    "iron-ajax": "polymerelements/iron-ajax#^1.2.0"
+    "iron-ajax": "polymerelements/iron-ajax#^1.2.0",
+    "app-router": "^2.6.1",
+    "carbon-route": "PolymerElements/carbon-route#^0.8.4"
   },
   "devDependencies": {
     "web-component-tester": "^4.0.0"

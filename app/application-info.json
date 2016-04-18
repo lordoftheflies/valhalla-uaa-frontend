@@ -1,0 +1,5 @@
+{
+    "name": "Valhalla",
+    "title": "OLAP cloud computing",
+    "authentication": "http://localhost:8080/authentication"
+}
