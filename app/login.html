@@ -16,7 +16,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="generator" content="Polymer Starter Kit">
-        <title>Error</title>
+        <title>Login</title>
 
         <!-- Place favicon.ico in the `app/` directory -->
 
@@ -63,64 +63,85 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         <span id="browser-sync-binding"></span>
         <template is="dom-bind" id="app">
 
-            <iron-ajax auto
-                       url="application-info.json"
-                       handle-as="json"
-                       last-response="{{applicationInfo}}"
-                       debounce-duration="300"></iron-ajax>
 
-            <!-- Main Area -->
+
+
+
+            <!--Main Area--> 
             <paper-scroll-header-panel main id="headerPanelMain" condenses keep-condensed-header>
-                <!-- Main Toolbar -->
+
+
+                <iron-ajax auto
+                           url="./domain/info"
+                           handle-as="json"
+                           last-response="{{applicationInfo}}"
+                           debounce-duration="300"></iron-ajax>
+
+                <!--Main Toolbar--> 
                 <paper-toolbar id="mainToolbar" class="tall">
-                    <!-- Application name -->
+                    <!--Application name--> 
                     <div class="middle middle-container">
                         <div class="app-name">{{applicationInfo.name}}</div>
                     </div>
 
-                    <!-- Application sub title -->
+                    <!--Application sub title--> 
                     <div class="bottom bottom-container">
                         <div class="bottom-title">{{applicationInfo.title}}</div>
                     </div>
                 </paper-toolbar>
 
-                <!-- Main Content -->
-                <section>
-                    <paper-material class="layout horizontal center">
-                        <div class="card-content">
-                        <label>Errror: !!!!!!!</label>
-                        </div>
-                    </paper-material>
-                </section>
+                <plutonium-login-widget id="loginWidget"
+                                        title="Login"
+                                        user-name-label="Email"
+                                        password-label="Password"
+                                        sign-in-label="Sign-in"
+                                        authentication-url="{{applicationInfo.authentication}}"
+                                        ></plutonium-login-widget>
+                <script type="text/javascript">
+var loginWidget = document.querySelector('plutonium-login-widget');
+loginWidget.addEventListener('authentication-success', function (e) {
+    console.log(e.detail);
+    page.redirect(app.query.callback);
+});
+loginWidget.addEventListener('authentication-fail', function (e, d, f) {
+    console.log(e.detail.error);
+    app.$.toast.text = 'Login failed. Please try again.';
+    app.$.toast.show();
+});
+                </script>
+
+                <paper-toast id="toast">
+                    <span class="toast-hide-button" role="button" tabindex="0" onclick="app.$.toast.hide()">Ok</span>
+                </paper-toast>  
+
+
             </paper-scroll-header-panel>
 
-            <paper-toast id="toast">
-                <span class="toast-hide-button" role="button" tabindex="0" onclick="app.$.toast.hide()">Ok</span>
-            </paper-toast>
 
-            <!-- Uncomment next block to enable Service Worker support (1/2) -->
+
+            <!--Uncomment next block to enable Service Worker support (1/2)--> 
             <!--
-            <paper-toast id="caching-complete"
-                         duration="6000"
-                         text="Caching complete! This app will work offline.">
-            </paper-toast>
-        
-            <platinum-sw-register auto-register
-                                  clients-claim
-                                  skip-waiting
-                                  base-uri="bower_components/platinum-sw/bootstrap"
-                                  on-service-worker-installed="displayInstalledToast">
-              <platinum-sw-cache default-cache-strategy="fastest"
-                                 cache-config-file="cache-config.json">
-              </platinum-sw-cache>
-            </platinum-sw-register>
+                        <paper-toast id="caching-complete"
+                                     duration="6000"
+                                     text="Caching complete! This app will work offline.">
+                        </paper-toast>
+            
+                        <platinum-sw-register auto-register
+                                              clients-claim
+                                              skip-waiting
+                                              base-uri="bower_components/platinum-sw/bootstrap"
+                                              on-service-worker-installed="displayInstalledToast">
+                            <platinum-sw-cache default-cache-strategy="fastest"
+                                               cache-config-file="cache-config.json">
+                            </platinum-sw-cache>
+                        </platinum-sw-register>
             -->
 
         </template>
 
-        <!-- build:js scripts/app.js -->
+        <!--build:js scripts/app.js--> 
         <script type="text/javascript" src="scripts/app.js"></script>
-        <!-- endbuild-->
+        <!--endbuild-->
     </body>
 
 </html>
