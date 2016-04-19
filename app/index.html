@@ -72,7 +72,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 
                 <iron-ajax auto
-                           url="application-info.json"
+                           url="./domain/info"
                            handle-as="json"
                            last-response="{{applicationInfo}}"
                            debounce-duration="300"></iron-ajax>
@@ -88,12 +88,25 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     <div class="bottom bottom-container">
                         <div class="bottom-title">{{applicationInfo.title}}</div>
                     </div>
+
+
                 </paper-toolbar>
                 <!-- carbon-location binds with the URL and produces a route for
                 carbon-route elements to consume. Since this demo needs to run without
                 server cooperation (e.g. with polyserve, in the elements catalog, etc) we'll
                 use the hash portion of the URL for our route paths. -->
-                <carbon-location use-hash-as-path route="{{route}}"></carbon-location>
+                <carbon-location route="{{route}}" use-hash-as-path></carbon-location>
+                <!--                <iron-location path="{{path}}" query="{{query}}"></iron-location>
+                                <iron-query-params
+                                    params-string="{{query}}"
+                                    params-object="{{queryParams}}">
+                                </iron-query-params>
+                -->                                
+                <!--<carbon-route-converter
+                                    path="{{path}}"
+                                    query-params="{{query}}"
+                                    route="{{route}}">
+                                </carbon-route-converter>-->
 
                 <!-- carbon-routes parse route paths based on the their `pattern`.
                 Parameters are extracted into the `data` object. The rest of the path that
@@ -110,8 +123,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                                                 user-name-label="Email"
                                                 password-label="Password"
                                                 sign-in-label="Sign-in"
-                                                authentication-url="{{applicationInfo.authentication}}"
+                                                authentication-url="{{applicationInfo.properties.authentication}}"
                                                 ></plutonium-login-widget>
+                        <paper-toast text="Your login attempt was not successful." 
+                                     opened$="{{query.authentication_error}}"></paper-toast>
+                        <paper-toast text="You are not permitted to access that resource." 
+                                     opened$="{{query.authorization_error}}"></paper-toast>
+
                         <script type="text/javascript">
 var loginWidget = document.querySelector('plutonium-login-widget');
 loginWidget.addEventListener('authentication-success', function (e) {
@@ -129,9 +147,14 @@ loginWidget.addEventListener('authentication-fail', function (e, d, f) {
                         kakak
                     </div>
                 </iron-pages>
+
                 <paper-toast id="toast">
                     <span class="toast-hide-button" role="button" tabindex="0" onclick="app.$.toast.hide()">Ok</span>
-                </paper-toast>  
+
+
+                </paper-toast>
+
+
 
 
             </paper-scroll-header-panel>
